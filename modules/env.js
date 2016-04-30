@@ -60,7 +60,7 @@ function get_home_directory () {
         var home = getenv('HOME') ||
             getenv('USERPROFILE') ||
             getenv('HOMEDRIVE') + getenv('HOMEPATH');
-        home = home.replace("/", "\\", "g");
+        home = home.replace(/\//g, "\\");
         dir.initWithPath(home);
     } else
         dir.initWithPath(getenv('HOME'));
