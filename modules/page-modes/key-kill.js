@@ -5,11 +5,15 @@
  * COPYING file.
 **/
 
+define_variable("key_kill_input_fields", false,
+    "When true, key-kill-mode will be active in input fields and textareas.");
+
 { let conkeror_version = get_mozilla_version();
   function key_kill_event_kill (event) {
       var elem = event.target;
-      if (elem instanceof Ci.nsIDOMHTMLInputElement ||
-          elem instanceof Ci.nsIDOMHTMLTextAreaElement)
+      if (!key_kill_input_fields &&
+          (elem instanceof Ci.nsIDOMHTMLInputElement ||
+           elem instanceof Ci.nsIDOMHTMLTextAreaElement))
       {
           return;
       }
