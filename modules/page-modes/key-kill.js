@@ -5,14 +5,19 @@
  * COPYING file.
 **/
 
-function key_kill_event_kill (event) {
-    var elem = event.target;
-    if (elem instanceof Ci.nsIDOMHTMLInputElement ||
-        elem instanceof Ci.nsIDOMHTMLTextAreaElement)
-    {
-        return;
-    }
-    event_kill(event);
+{ let conkeror_version = get_mozilla_version();
+  function key_kill_event_kill (event) {
+      var elem = event.target;
+      if (elem instanceof Ci.nsIDOMHTMLInputElement ||
+          elem instanceof Ci.nsIDOMHTMLTextAreaElement)
+      {
+          return;
+      }
+      if (version_compare(conkeror_version, "25.0") < 0) {
+          event.preventDefault();
+      }
+      event.stopPropagation();
+  }
 }
 
 define_page_mode("key-kill-mode",
